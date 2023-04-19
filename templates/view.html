@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1 class="primer">All Tasks</h1>
+    <div class="d-flex justify-content-between">
+        <div class="buttons-container">
+            <form class="window" action="/add_task" method="POST">
+                <button type="submit" class="btn btn-warning">Insert a Task</button>
+            </form>
+            <form action="/view_task_by_category" method="POST">
+                <button type="submit" class="btn btn-light">View by Category</button>
+            </form>
+            <form action="/delete_all_tasks" method="POST">
+                <button type="submit" class="btn btn-danger">Delete All Tasks</button>
+            </form>
+            <form action="/delete_completed_tasks" method="POST">
+                <button type="submit" class="btn btn-secondary">Delete Completed Tasks</button>
+            </form>
+        </div>
+
+
+    <div class="tasks-container">
+        {% for task in all_tasks %}
+        <ul class="child">
+
+        <li>Task Number : {{ task.id }}</li>
+        <li>Task Name : {{ task.task_name }}</li>
+        <li>Task Category : {{ task.category }}</li>
+        <li>Start Date : {{ task.start_date }}</li>
+        <li>End Date : {{ task.end_date }}</li>
+        <li>Task Details: {{ task.task_detail | safe }}</li>
+
+        <div id="section">
+            <li><a class="bt btleft" href="/show_task/{{ task.id }}">Select task</a></li>
+            <li><a class="bt btleft" href="/">Return Home</a></li>
+        </div>
+        </ul>
+    {% endfor %}
+  </div>
+        {% endblock content %} </div>

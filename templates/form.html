@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3 class="primer">ToDo list Task Form</h3>
+    <div id="section">
+    <ul>
+    <li class="sec">Enter a new task or return to home</li>
+    <li><a class="bt btleft" href="/">Return Home</a></li>
+    </ul>
+    </div>
+
+    <form  method="POST"  action="">
+        <div class="container-fluid">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+        <p>
+            {{ form.task_name.label(class="form-control-label") }}
+            {{ form.task_name(class="form-control form-control-md") }}
+        </p>
+        <p>
+            {{ form.category.label(class="form-control-label") }}
+            {{ form.category(class="form-control form-control-md")}}
+        </p>
+        <p>
+            {{ form.start_date.label(class="form-control-label") }}
+            {{ form.start_date(class="form-control form-control-lg") }}
+        </p>
+        <p>
+            {{ form.end_date.label(class="form-control-label") }}
+            {{ form.end_date(class="form-control form-control-md") }}
+        </p>
+        <p>
+            {{ form.status.label(class="form-control-label") }}
+            {{ form.status(class="form-control form-control-md") }}
+        </p>
+        <p>
+            {{ form.task_detail.label }}
+            {{ form.task_detail | safe }}
+        </p>
+       </div>
+        <br/>
+         <div>
+<!--        <input type="submit" name="Save" value="Save">-->
+             {{ form.submit(class="btn btn-secondary") }}
+        </div>
+     </form>
+          {{ ckeditor.load() }}
+          {{ ckeditor.config(name='Task_Detail') }}
+
+    </div>
+
+{% endblock content %}

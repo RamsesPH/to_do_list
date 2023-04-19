@@ -1,0 +1,30 @@
+{% extends "base.html"%}
+
+
+{% block content %}
+<div>
+    <h1 class="primer">to Do list</h1>
+    <br>
+    <br>
+<div class="deco">
+    <h2 class="text-center">Your Personal Task Manager</h2>
+    <br>
+</div>
+</div>
+
+    <div class="container">
+        <div class="d-flex justify-content-evenly">
+            <form action="/add_task" method = 'POST'>
+                <button type="submit" class="btn btn-warning">Insert a Task</button>
+<!--                <input type="submit" name="button"  value="Insert Task"><br>-->
+                <br/>
+            </form>
+            <form action="/view" method="GET">
+                <button type="submit" class="btn btn-light">View all Tasks</button>
+<!--                <input type="submit" name="button" value="View Tasks">-->
+             </form>
+         </div>
+     </div>
+</div>
+
+{% endblock content %}

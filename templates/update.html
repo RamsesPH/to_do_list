@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content%}
+
+<h2>Enter the field you want to update</h2>
+<form method='POST' action="/update/{{ id }}">
+    {{ form.id.label }} {{ form.id }}
+    {{ form.task_name.label }} {{ form.task_name }}
+    {{ form.category.label }} {{ form.category }}
+    {{ form.end_date.label }} {{ form.end_date }}
+    {{ form.status.label }} {{ form.status }}
+    {{ form.task_detail.label }} {{ form.task_detail }}
+
+    <input type="submit" formaction="{{ url_for('task') }}" id=task.id value="update">
+</form>
+{{ message }}
+
+{% endblock content %}
