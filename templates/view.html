@@ -1,41 +1,48 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <div class="primer"  style="display: flex; justify-content: space-between;">
+      <h1 class="">All Tasks</h1>
+        <h5><button class="bt toco btn-primary" onclick="window.location.href='/'">Return home</button></h5>
+    </div>
 
-    <h1 class="primer">All Tasks</h1>
     <div class="d-flex justify-content-between">
-        <div class="buttons-container">
-            <form class="window" action="/add_task" method="POST">
-                <button type="submit" class="btn btn-warning">Insert a Task</button>
-            </form>
-            <form action="/view_task_by_category" method="POST">
-                <button type="submit" class="btn btn-light">View by Category</button>
-            </form>
-            <form action="/delete_all_tasks" method="POST">
-                <button type="submit" class="btn btn-danger">Delete All Tasks</button>
-            </form>
-            <form action="/delete_completed_tasks" method="POST">
-                <button type="submit" class="btn btn-secondary">Delete Completed Tasks</button>
-            </form>
+    <div class="boxes-container">
+        <div class="box orange">
+            <h2>{{ tasks_scheduled_today_count }}</h2>
+            <p>Scheduled Today</p>
         </div>
-
+        <div class="box red">
+            <h2>{{ flagged_tasks_count }}</h2>
+            <p>Flagged Tasks</p>
+        </div>
+        <div class="box green">
+            <h2>{{ active_tasks_count }}</h2>
+            <p>Active Tasks</p>
+        </div>
+        <div class="box blue">
+            <h2>{{ completed_tasks_count }}</h2>
+            <p>Completed Tasks</p>
+        </div>
+    </div>
 
     <div class="tasks-container">
         {% for task in all_tasks %}
         <ul class="child">
-
         <li>Task Number : {{ task.id }}</li>
         <li>Task Name : {{ task.task_name }}</li>
-        <li>Task Category : {{ task.category }}</li>
+<!--        <li>Task Category : {{ task.category }}</li>-->
         <li>Start Date : {{ task.start_date }}</li>
-        <li>End Date : {{ task.end_date }}</li>
-        <li>Task Details: {{ task.task_detail | safe }}</li>
+<!--        <li>End Date : {{ task.end_date }}</li>-->
+<!--        <li>Task Details: {{ task.task_detail | safe }}</li>-->
 
-        <div id="section">
-            <li><a class="bt btleft" href="/show_task/{{ task.id }}">Select task</a></li>
-            <li><a class="bt btleft" href="/">Return Home</a></li>
-        </div>
+        <li>
+            <div id="section">
+            <div class="bt"><a href="/show_task/{{ task.id }}">Select-task</a></div>
+<!--        <div class="bt btleft"><a href="/">Return-Home</a></div>-->
+        </li>
         </ul>
     {% endfor %}
   </div>
+
         {% endblock content %} </div>
