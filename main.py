@@ -7,15 +7,19 @@ from wtforms import StringField, SubmitField, IntegerField, SelectField
 from wtforms.fields import DateField
 from wtforms.validators import DataRequired
 from flask_ckeditor import CKEditor, CKEditorField
+from dotenv import load_dotenv
+import os
 import datetime
 
 # from dotenv import load_dotenv
+load_dotenv()
 
 # Flask app instantiation & Flask connect to DB
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///task-list'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'mysecretkey'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+# app.config['SECRET_KEY'] = 'mysecretkey'
 
 ckeditor = CKEditor(app)
 
