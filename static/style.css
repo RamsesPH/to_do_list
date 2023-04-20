@@ -21,6 +21,8 @@ body { background-color: #EAEDED; }
     font-size: 40px;
     }
 
+.marco { margin: 20px; }
+
 .deco{ padding: 10px 50px 50px 50px; }
 
 .toco{ padding: 10px 50px 10px 50px;}
@@ -110,16 +112,20 @@ body { background-color: #EAEDED; }
     width: 125px;
     height: 100px;
     border-radius: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     color: #fff;
     margin: 30px 30px 20px 50px;
-    padding-left: 5px;
+    text-align: center;
+    padding: 3px;
 }
 
 .orange {
     background-color: orange;
+}
+
+.teal {
+    background-color: grey;
 }
 
 .red {

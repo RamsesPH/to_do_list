@@ -2,8 +2,11 @@
 
 
 {% block content %}
-
-    <div class="primer">Task {{ task.id }}</div>
+    <div class="primer"  style="display: flex; justify-content: space-between;">
+    <h1 class="">Task {{ task.id }}</h1>
+    <h5><button class="bt toco btn-primary" onclick="window.location.href='/'">Return home</button></h5>
+    </div>
+<!--    <div class="primer">Task {{ task.id }}</div>-->
     <br>
     <ul class="child">
     <li>Task Number : {{ task.id }}</li>
@@ -11,11 +14,12 @@
     <li>Task Category : {{ task.category }}</li>
     <li>Start Date : {{ task.start_date }}</li>
     <li>End Date : {{ task.end_date }}</li>
+    <li>Task Status : {{ task.status }}</li>
     <li>Task Details: {{ task.task_detail | safe }}</li>
     <div id="section">
     <div><a class="bt btleft" href="/delete/{{ task.id }}">Delete task</a></div>
     <div><a class="bt btleft" href="/update/{{ task.id }}">Update task</a></div>
-    <div><a class="bt btleft" href="/">Return Home</a></div>
+<!--    <div><a class="bt btleft" href="/">Return Home</a></div>-->
     </div>
     </ul>
 

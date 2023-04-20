@@ -3,10 +3,11 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField
+from wtforms import StringField, SubmitField, IntegerField, SelectField
 from wtforms.fields import DateField
 from wtforms.validators import DataRequired
 from flask_ckeditor import CKEditor, CKEditorField
+import datetime
 
 # from dotenv import load_dotenv
 
@@ -20,8 +21,10 @@ ckeditor = CKEditor(app)
 
 db = SQLAlchemy(app)
 
+# Calculate the current date
+today = datetime.date.today()
 
-#  Create Tables -- Task_Table  --
+# Create Tables -- Task_Table
 
 class Task(db.Model):
     __tablename__ = "task"
@@ -43,7 +46,7 @@ class TaskForm(FlaskForm):
     task_detail = CKEditorField("Task_Detail")
     start_date = DateField('start_date', format='%Y-%m-%d', validators=[DataRequired()])
     end_date = DateField('end_date', format='%Y-%m-%d', validators=[DataRequired()])
-    status = StringField("Task_Status", validators=[DataRequired()])
+    status = SelectField("Task_Status", choices=['Active', 'Completed', 'Cancelled', 'Overdue'], validators=[DataRequired()])
     submit = SubmitField("Submit Task")
 
 
@@ -64,8 +67,19 @@ def home():
 
 @app.route("/view", methods=['GET', 'POST'])
 def task():
+    global today
     all_tasks = Task.query.all()
-    return render_template('view.html', all_tasks=all_tasks, title='all tasks')
+    completed_tasks_count = Task.query.filter_by(status='Completed').count()
+    active_tasks_count = Task.query.filter_by(status='Active').count()
+    cancelled_tasks_count = Task.query.filter_by(status='Cancelled').count()
+    tasks_scheduled_today_count = Task.query.filter(Task.start_date==today).count()
+    overdue_tasks_count = Task.query.filter(Task.end_date<today, Task.status=='Active').count()
+    return render_template('view.html', all_tasks=all_tasks, title='all tasks',
+                           completed_tasks_count=completed_tasks_count,
+                           active_tasks_count=active_tasks_count,
+                           cancelled_tasks_count=cancelled_tasks_count,
+                           overdue_tasks_count=overdue_tasks_count,
+                           tasks_scheduled_today_count=tasks_scheduled_today_count)
 
 
 @app.route("/show_task/<int:id>")
